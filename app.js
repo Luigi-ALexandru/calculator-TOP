@@ -140,6 +140,9 @@ btn9.addEventListener("click", function() {
 //operator buttons
 const btnPlus = document.querySelector(".btn-plus");
 btnPlus.addEventListener("click", function() {
+    if(screen.textContent === "") {
+        return;
+    } else {
     //store string to firstString
     firstString = screen.textContent;
     //convert firstString to numbers and store it inside num1
@@ -147,10 +150,14 @@ btnPlus.addEventListener("click", function() {
     //delete content of firstString
     deleteContentFirstString();
     screen.textContent = screen.textContent + " + ";
+    }
 });
 
 const btnMinus = document.querySelector(".btn-minus");
 btnMinus.addEventListener("click", function() {
+    if(screen.textContent === "") {
+        return;
+    } else {
      //store string to firstString
      firstString = screen.textContent;
      //convert firstString to numbers and store it inside num1
@@ -158,10 +165,14 @@ btnMinus.addEventListener("click", function() {
      //delete content of firstString
      deleteContentFirstString();
     screen.textContent = screen.textContent + " - ";
+    }
 });
 
 const btnMultiply = document.querySelector(".btn-multiply");
 btnMultiply.addEventListener("click", function() {
+    if(screen.textContent === "") {
+        return;
+    } else {
      //store string to firstString
      firstString = screen.textContent;
      //convert firstString to numbers and store it inside num1
@@ -169,10 +180,14 @@ btnMultiply.addEventListener("click", function() {
      //delete content of firstString
      deleteContentFirstString();
     screen.textContent = screen.textContent + " * ";
+    }
 });
 
 const btnDivide = document.querySelector(".btn-divide");
 btnDivide.addEventListener("click", function() {
+    if(screen.textContent === "") {
+        return;
+    } else {
      //store string to firstString
      firstString = screen.textContent;
      //convert firstString to numbers and store it inside num1
@@ -180,10 +195,14 @@ btnDivide.addEventListener("click", function() {
      //delete content of firstString
      deleteContentFirstString();
     screen.textContent = screen.textContent + " / ";
+    }
 });
 
 const btnEqual = document.querySelector(".btn-equal");
 btnEqual.addEventListener("click", function() {
+    if(screen.textContent === "") {
+        return;
+    } else {
     //loop through screen.textContent string and push numbers to filteredArray 
     filterNums(screen.textContent);
     //convert filteredArray to string and store it inside secondString
@@ -197,4 +216,5 @@ btnEqual.addEventListener("click", function() {
     //calculate!!
     returnValue();
     screen.textContent = result;
+    }
 });
