@@ -1,7 +1,7 @@
 //declare global variables
-let newArray = [];
-let arrayNumbers = [];
 let filteredArray = [];
+let firstString = "";
+let secondString = "";
 let num1 = 0;
 let num2 = 0;
 let result = 0;
@@ -11,81 +11,69 @@ let operator2 = "-";
 let operator3 = "*";
 let operator4 = "/";
 
-//convert string to array
-function stringToArray(x) {
-    newArray = x.split("");
+//convert string to numbers and store it in num1
+function convertToNum() {
+    num1 = Number(firstString);
 }
-//loop through array, find numbers and push them to array
-function arrayLoopPush(newArray) {
-    for(let i = 0; i < newArray.length; i++) {
-        if(!isNaN(newArray[i])) {
-            arrayNumbers.push(newArray[i]);
-        }
-    }
-    };
-
-//convert "arrayNumbers" to numbers
-function arrNumsToNums(x) {
-    x = parseInt(arrayNumbers.join(''));
+//do the same here and store it in num2
+function convertToNum2() {
+    num2 = Number(secondString);
 }
-//convert "filteredArray" to numbers
-function filteredArrNumsToNums(x) {
-    x = parseInt(filteredArray.join(''));
+//convert filteredArray to string
+function convertArrayToString() {
+    secondString = filteredArray.join('');
 }
-
-//delete content of arrays
-function deleteContent() {
-    arrayNumbers.length = 0;
-    newArray.length = 0;
+//delete content of arrays/strings
+function deleteContentFirstString() {
+    firstString = "";
+}
+function deleteContentSecondString() {
+    secondString = "";
+}
+function deleteFilteredArray() {
     filteredArray.length = 0;
 }
 
-//filter array elements after - + * or / operators
-function filterNums(array) {
+//loop and filter elements, then push them to filteredArray
+function filterNums(x) {
     let foundOperator = false;
-    for (let i = 0; i < array.length; i++) {
-        if (foundOperator === true && !isNaN(array[i])) {
-            filteredArray.push(array[i]);
-        } else if (array[i] === operator1 || array[i] === operator2 || array[i] === operator3 || array[i] === operator4) {
+    for (let i = 0; i < x.length; i++) {
+        if (foundOperator === true && (!isNaN(x[i]) || x[i] === ".")) {
+            filteredArray.push(x[i]);
+        } else if (x[i] === operator1 || x[i] === operator2 || x[i] === operator3 || x[i] === operator4) {
             foundOperator = true;
         }
     }
-    return filteredArray;
 }
 
 //create functions that add, subtract, multiply and divide
-function add(x, y) {
-    return result = x + y;
+function add() {
+    result = num1 + num2;
 }
 
-function subtract(x, y) {
-    return result = x - y;
+function subtract() {
+    result = num1 - num2;
 }
 
-function multiply(x, y) {
-    return result = x * y;
+function multiply() {
+    result = num1 * num2;
 }
 
-function divide(x, y) {
-    return result = x / y;
+function divide() {
+    result = num1 / num2;
 }
 
 //check operator and return value stored in RESULT!
 function returnValue() {
-    stringToArray(screen.textContent);
-    for(let i = 0; i < newArray.length; i++) {
-        if(newArray[i] === operator1) {
-            result = add(num1, num2);
-            return result;
-        } else if(newArray[i] === operator2) {
-            result = subtract(num1, num2);
-            return result;
-        } else if(newArray[i] === operator3) {
-            result = multiply(num1, num2);
-            return result;
-        } else if(newArray[i] === operator4) {
-            result = divide(num1, num2);
-            return result;
+    for(let i = 0; i < screen.textContent.length; i++) {
+        if(screen.textContent[i] === operator1) {
+            add();
+        } else if(screen.textContent[i] === operator2) {
+            subtract();
+        } else if(screen.textContent[i] === operator3) {
+            multiply();
+        } else if(screen.textContent[i] === operator4) {
+            divide();
         }
     }
 }
@@ -134,7 +122,7 @@ btn6.addEventListener("click", function() {
     screen.textContent = screen.textContent + 6;
 });
 
-const btn7 = document.querySelector(".btn-seven");
+const btn7 = document.querySelector(".btn-seven");  
 btn7.addEventListener("click", function() {
     screen.textContent = screen.textContent + 7;
 });
@@ -152,44 +140,60 @@ btn9.addEventListener("click", function() {
 //operator buttons
 const btnPlus = document.querySelector(".btn-plus");
 btnPlus.addEventListener("click", function() {
-    //convert string to array
-    stringToArray(screen.textContent);
-    //loop and push numbers to arrayNumbers
-    arrayLoopPush(newArray);
-    //add nums to num1 and delete array contents
-    arrNumsToNums(num1);
-    //delete content of newArray and arrayNumbers
-    deleteContent();
+    //store string to firstString
+    firstString = screen.textContent;
+    //convert firstString to numbers and store it inside num1
+    convertToNum();
+    //delete content of firstString
+    deleteContentFirstString();
     screen.textContent = screen.textContent + " + ";
 });
 
 const btnMinus = document.querySelector(".btn-minus");
 btnMinus.addEventListener("click", function() {
+     //store string to firstString
+     firstString = screen.textContent;
+     //convert firstString to numbers and store it inside num1
+     convertToNum();
+     //delete content of firstString
+     deleteContentFirstString();
     screen.textContent = screen.textContent + " - ";
 });
 
 const btnMultiply = document.querySelector(".btn-multiply");
 btnMultiply.addEventListener("click", function() {
+     //store string to firstString
+     firstString = screen.textContent;
+     //convert firstString to numbers and store it inside num1
+     convertToNum();
+     //delete content of firstString
+     deleteContentFirstString();
     screen.textContent = screen.textContent + " * ";
 });
 
 const btnDivide = document.querySelector(".btn-divide");
 btnDivide.addEventListener("click", function() {
+     //store string to firstString
+     firstString = screen.textContent;
+     //convert firstString to numbers and store it inside num1
+     convertToNum();
+     //delete content of firstString
+     deleteContentFirstString();
     screen.textContent = screen.textContent + " / ";
 });
 
 const btnEqual = document.querySelector(".btn-equal");
 btnEqual.addEventListener("click", function() {
-    //convert string to array
-    stringToArray(screen.textContent);
-    //loop and push numbers to arrayNumbers
-    arrayLoopPush(newArray);
-    //loop and filter numbers after OPERATOR and push them to filteredArray
-    filterNums(arrayNumbers);
-    //convert array to nums and store them in num2
-    filteredArrNumsToNums(num2);
-    //delete content for all arrays again
-    deleteContent();
+    //loop through screen.textContent string and push numbers to filteredArray 
+    filterNums(screen.textContent);
+    //convert filteredArray to string and store it inside secondString
+    convertArrayToString();
+    //delete filteredArray content
+    deleteFilteredArray();
+    //convert secondString to numbers and store it inside num2
+    convertToNum2();
+    //delete content secondString
+    deleteContentSecondString();
     //calculate!!
     returnValue();
     screen.textContent = result;
