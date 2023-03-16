@@ -34,6 +34,16 @@ function deleteFilteredArray() {
     filteredArray.length = 0;
 }
 
+//check if button has been pressed or not
+let operatorPressed = false;
+let equalPressed = false;
+let resultOnScreen = false;
+
+//delete textContent
+function resetContent() {
+    screen.textContent = "";
+}
+
 //loop and filter elements, then push them to filteredArray
 function filterNums(x) {
     let foundOperator = false;
@@ -84,62 +94,103 @@ const screen = document.querySelector(".screen");
 //erase button
 const btnC = document.querySelector(".btn-C");
 btnC.addEventListener("click", function() {
-    screen.textContent = "";
+    resetContent();
 });
 // 0 to 9 buttons
 const btn0 = document.querySelector(".btn-zero");
 btn0.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 0;
 });
 
 const btn1 = document.querySelector(".btn-one");
 btn1.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 1;
 });
 
 const btn2 = document.querySelector(".btn-two");
 btn2.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 2;
 });
 
 const btn3 = document.querySelector(".btn-three");
 btn3.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 3;
 });
 
 const btn4 = document.querySelector(".btn-four");
 btn4.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 4;
 });
 
 const btn5 = document.querySelector(".btn-five");
 btn5.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 5;
 });
 
 const btn6 = document.querySelector(".btn-six");
 btn6.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 6;
 });
 
 const btn7 = document.querySelector(".btn-seven");  
 btn7.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 7;
 });
 
 const btn8 = document.querySelector(".btn-eight");
 btn8.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 8;
 });
 
 const btn9 = document.querySelector(".btn-nine");
 btn9.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
     screen.textContent = screen.textContent + 9;
 });
 
 //operator buttons
 const btnPlus = document.querySelector(".btn-plus");
 btnPlus.addEventListener("click", function() {
+    resultOnScreen = false;
     if(screen.textContent === "") {
         return;
     } else {
@@ -150,11 +201,13 @@ btnPlus.addEventListener("click", function() {
     //delete content of firstString
     deleteContentFirstString();
     screen.textContent = screen.textContent + " + ";
+    operatorPressed = true;
     }
 });
 
 const btnMinus = document.querySelector(".btn-minus");
 btnMinus.addEventListener("click", function() {
+    resultOnScreen = false;
     if(screen.textContent === "") {
         return;
     } else {
@@ -165,11 +218,13 @@ btnMinus.addEventListener("click", function() {
      //delete content of firstString
      deleteContentFirstString();
     screen.textContent = screen.textContent + " - ";
+    operatorPressed = true;
     }
 });
 
 const btnMultiply = document.querySelector(".btn-multiply");
 btnMultiply.addEventListener("click", function() {
+    resultOnScreen = false;
     if(screen.textContent === "") {
         return;
     } else {
@@ -180,11 +235,13 @@ btnMultiply.addEventListener("click", function() {
      //delete content of firstString
      deleteContentFirstString();
     screen.textContent = screen.textContent + " * ";
+    operatorPressed = true;
     }
 });
 
 const btnDivide = document.querySelector(".btn-divide");
 btnDivide.addEventListener("click", function() {
+    resultOnScreen = false;
     if(screen.textContent === "") {
         return;
     } else {
@@ -195,6 +252,7 @@ btnDivide.addEventListener("click", function() {
      //delete content of firstString
      deleteContentFirstString();
     screen.textContent = screen.textContent + " / ";
+    operatorPressed = true;
     }
 });
 
@@ -202,6 +260,9 @@ const btnEqual = document.querySelector(".btn-equal");
 btnEqual.addEventListener("click", function() {
     if(screen.textContent === "") {
         return;
+    } else if(screen.textContent !== "" && operatorPressed === false) {
+        result = screen.textContent;
+        equalPressed = true;
     } else {
     //loop through screen.textContent string and push numbers to filteredArray 
     filterNums(screen.textContent);
@@ -216,5 +277,8 @@ btnEqual.addEventListener("click", function() {
     //calculate!!
     returnValue();
     screen.textContent = result;
+    operatorPressed = false;
+    equalPressed = true;
+    resultOnScreen = true;
     }
 });
