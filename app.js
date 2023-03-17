@@ -2,9 +2,9 @@
 let filteredArray = [];
 let firstString = "";
 let secondString = "";
-let num1 = 0;
-let num2 = 0;
-let result = 0;
+let num1 = null;
+let num2 = null;
+let result = null;
 //declare operators
 let operator1 = "+";
 let operator2 = "-";
@@ -181,7 +181,6 @@ btn9.addEventListener("click", function() {
     }
     screen.textContent = screen.textContent + 9;
 });
-
 //operator buttons
 const btnPlus = document.querySelector(".btn-plus");
 btnPlus.addEventListener("click", function() {
@@ -211,6 +210,7 @@ btnMinus.addEventListener("click", function() {
     } else {
     resultOnScreen = false;
     if(screen.textContent === "") {
+        screen.textContent = "-";
         return;
     } else {
      //store string to firstString
