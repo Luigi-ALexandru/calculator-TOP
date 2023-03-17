@@ -39,15 +39,10 @@ let operatorPressed = false;
 let equalPressed = false;
 let resultOnScreen = false;
 
-//delete textContent
-function resetContent() {
-    screen.textContent = "";
-}
-
 //loop and filter elements, then push them to filteredArray
 function filterNums(x) {
     let foundOperator = false;
-    for (let i = 0; i < x.length; i++) {
+    for (let i = 1; i < x.length; i++) {
         if (foundOperator === true && (!isNaN(x[i]) || x[i] === ".")) {
             filteredArray.push(x[i]);
         } else if (x[i] === operator1 || x[i] === operator2 || x[i] === operator3 || x[i] === operator4) {
@@ -94,7 +89,7 @@ const screen = document.querySelector(".screen");
 //erase button
 const btnC = document.querySelector(".btn-C");
 btnC.addEventListener("click", function() {
-    resetContent();
+    screen.textContent = "";
 });
 // 0 to 9 buttons
 const btn0 = document.querySelector(".btn-zero");
@@ -190,6 +185,9 @@ btn9.addEventListener("click", function() {
 //operator buttons
 const btnPlus = document.querySelector(".btn-plus");
 btnPlus.addEventListener("click", function() {
+    if(operatorPressed === true) {
+        giveResult();
+    } else {
     resultOnScreen = false;
     if(screen.textContent === "") {
         return;
@@ -203,10 +201,14 @@ btnPlus.addEventListener("click", function() {
     screen.textContent = screen.textContent + " + ";
     operatorPressed = true;
     }
+    }
 });
 
 const btnMinus = document.querySelector(".btn-minus");
 btnMinus.addEventListener("click", function() {
+    if(operatorPressed === true) {
+        giveResult();
+    } else {
     resultOnScreen = false;
     if(screen.textContent === "") {
         return;
@@ -220,10 +222,14 @@ btnMinus.addEventListener("click", function() {
     screen.textContent = screen.textContent + " - ";
     operatorPressed = true;
     }
+    }
 });
 
 const btnMultiply = document.querySelector(".btn-multiply");
 btnMultiply.addEventListener("click", function() {
+    if(operatorPressed === true) {
+        giveResult();
+    } else {
     resultOnScreen = false;
     if(screen.textContent === "") {
         return;
@@ -237,10 +243,14 @@ btnMultiply.addEventListener("click", function() {
     screen.textContent = screen.textContent + " * ";
     operatorPressed = true;
     }
+    }
 });
 
 const btnDivide = document.querySelector(".btn-divide");
 btnDivide.addEventListener("click", function() {
+    if(operatorPressed === true) {
+        giveResult();
+    } else {
     resultOnScreen = false;
     if(screen.textContent === "") {
         return;
@@ -254,7 +264,34 @@ btnDivide.addEventListener("click", function() {
     screen.textContent = screen.textContent + " / ";
     operatorPressed = true;
     }
+    }
 });
+//function for the equal button, decided to extract it and put it outside
+function giveResult() {
+    if(screen.textContent === "") {
+        return;
+    } else if(screen.textContent !== "" && operatorPressed === false) {
+        result = screen.textContent;
+        equalPressed = true;
+    } else {
+    //loop through screen.textContent string and push numbers to filteredArray 
+    filterNums(screen.textContent);
+    //convert filteredArray to string and store it inside secondString
+    convertArrayToString();
+    //delete filteredArray content
+    deleteFilteredArray();
+    //convert secondString to numbers and store it inside num2
+    convertToNum2();
+    //delete content secondString
+    deleteContentSecondString();
+    //calculate!!
+    returnValue();
+    screen.textContent = result;
+    operatorPressed = false;
+    equalPressed = true;
+    resultOnScreen = true;
+    }
+}
 
 const btnEqual = document.querySelector(".btn-equal");
 btnEqual.addEventListener("click", function() {
