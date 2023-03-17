@@ -90,6 +90,7 @@ const screen = document.querySelector(".screen");
 const btnC = document.querySelector(".btn-C");
 btnC.addEventListener("click", function() {
     screen.textContent = "";
+    document.querySelector(".btn-decimalPoint").disabled = false;
 });
 // 0 to 9 buttons
 const btn0 = document.querySelector(".btn-zero");
@@ -181,6 +182,17 @@ btn9.addEventListener("click", function() {
     }
     screen.textContent = screen.textContent + 9;
 });
+
+const decimalPoint = document.querySelector(".btn-decimalPoint");
+decimalPoint.addEventListener("click", function() {
+    if(resultOnScreen === true) {
+        screen.textContent = "";
+        resultOnScreen = false;
+    }
+    screen.textContent = screen.textContent + ".";
+    document.querySelector(".btn-decimalPoint").disabled = true;
+});
+
 //operator buttons
 const btnPlus = document.querySelector(".btn-plus");
 btnPlus.addEventListener("click", function() {
@@ -199,6 +211,7 @@ btnPlus.addEventListener("click", function() {
     deleteContentFirstString();
     screen.textContent = screen.textContent + " + ";
     operatorPressed = true;
+    document.querySelector(".btn-decimalPoint").disabled = false;
     }
     }
 });
@@ -221,6 +234,7 @@ btnMinus.addEventListener("click", function() {
      deleteContentFirstString();
     screen.textContent = screen.textContent + " - ";
     operatorPressed = true;
+    document.querySelector(".btn-decimalPoint").disabled = false;
     }
     }
 });
@@ -242,6 +256,7 @@ btnMultiply.addEventListener("click", function() {
      deleteContentFirstString();
     screen.textContent = screen.textContent + " * ";
     operatorPressed = true;
+    document.querySelector(".btn-decimalPoint").disabled = false;
     }
     }
 });
@@ -263,6 +278,7 @@ btnDivide.addEventListener("click", function() {
      deleteContentFirstString();
     screen.textContent = screen.textContent + " / ";
     operatorPressed = true;
+    document.querySelector(".btn-decimalPoint").disabled = false;
     }
     }
 });
@@ -317,5 +333,6 @@ btnEqual.addEventListener("click", function() {
     operatorPressed = false;
     equalPressed = true;
     resultOnScreen = true;
+    document.querySelector(".btn-decimalPoint").disabled = false;
     }
 });
